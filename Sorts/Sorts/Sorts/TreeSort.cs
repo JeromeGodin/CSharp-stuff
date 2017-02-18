@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Sorts.Sorts
 {
-    public class QuickSort : ISort
+    public class TreeSort : ISort
     {
         public bool IsStable
         {
-            get { return false; }
+            get { return true; }
         }
 
         private TimeComplexity _timeComplexity = new TimeComplexity() { BestCase = "Ω(n log(n))", AverageCase = "Θ(n log(n))", WorstCase = "O(n^2)" };
@@ -21,7 +21,7 @@ namespace Sorts.Sorts
 
         public string SpaceComplexity
         {
-            get { return "O(log(n))"; }
+            get { return "O(n)"; }
         }
 
         private TimeSpan _executionTime;
@@ -39,34 +39,7 @@ namespace Sorts.Sorts
 
         private void SortIteration(IComparable[] collectionToSort, int left, int right)
         {
-            int i = left;
-            int j = right;
-            IComparable pivot = collectionToSort[(left + right) / 2];
-
-            while (i <= j)
-            {
-                while (collectionToSort[i].CompareTo(pivot) < 0)
-                    i++;
-
-                while (collectionToSort[j].CompareTo(pivot) > 0)
-                    j--;
-
-                if (i <= j)
-                {
-                    IComparable temporaryCollection = collectionToSort[i];
-                    collectionToSort[i] = collectionToSort[j];
-                    collectionToSort[j] = temporaryCollection;
-
-                    i++;
-                    j--;
-                }
-            }
-
-            if (left < j)
-                SortIteration(collectionToSort, left, j);
-
-            if (i < right)
-                SortIteration(collectionToSort, i, right);
+            throw new NotImplementedException();
         }
     }
 }

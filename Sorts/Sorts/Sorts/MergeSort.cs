@@ -8,15 +8,26 @@ namespace Sorts.Sorts
 {
     public class MergeSort : ISort
     {
+        public bool IsStable
+        {
+            get { return true; }
+        }
+
+        private TimeComplexity _timeComplexity = new TimeComplexity() { BestCase = "Ω(n log(n))", AverageCase = "Θ(n log(n))", WorstCase = "O(n log(n))" };
+        public TimeComplexity TimeComplexity
+        {
+            get { return _timeComplexity; }
+        }
+
+        public string SpaceComplexity
+        {
+            get { return "O(n)"; }
+        }
+
         private TimeSpan _executionTime;
         public TimeSpan ExecutionTime
         {
             get { return _executionTime; }
-        }
-
-        public bool IsStable
-        {
-            get { return true; }
         }
 
         public void Sort(IComparable[] collectionToSort)
@@ -26,7 +37,7 @@ namespace Sorts.Sorts
             _executionTime = DateTime.Now - startTime;
         }
 
-        public void SortIteration(IComparable[] collectionToSort, int left, int right)
+        private void SortIteration(IComparable[] collectionToSort, int left, int right)
         {
             int mid;
 
@@ -36,36 +47,36 @@ namespace Sorts.Sorts
                 SortIteration(collectionToSort, left, mid);
                 SortIteration(collectionToSort, (mid + 1), right);
 
-                DoMerge(collectionToSort, left, (mid + 1), right);
+                Merge(collectionToSort, left, (mid + 1), right);
             }
         }
 
-        public void DoMerge(IComparable[] collectionToSort, int left, int mid, int right)
+        private void Merge(IComparable[] collectionToSort, int left, int mid, int right)
         {
-            IComparable[] temp = new IComparable[collectionToSort.Count()];
-            int i, left_end, num_elements, tmp_pos;
+            IComparable[] temporaryCollection = new IComparable[collectionToSort.Count()];
+            int i, leftBound, numberOfElements, temporaryPosition;
 
-            left_end = (mid - 1);
-            tmp_pos = left;
-            num_elements = (right - left + 1);
+            leftBound = (mid - 1);
+            temporaryPosition = left;
+            numberOfElements = (right - left + 1);
 
-            while ((left <= left_end) && (mid <= right))
+            while ((left <= leftBound) && (mid <= right))
             {
                 if (collectionToSort[left].CompareTo(collectionToSort[mid]) <= 0)
-                    temp[tmp_pos++] = collectionToSort[left++];
+                    temporaryCollection[temporaryPosition++] = collectionToSort[left++];
                 else
-                    temp[tmp_pos++] = collectionToSort[mid++];
+                    temporaryCollection[temporaryPosition++] = collectionToSort[mid++];
             }
 
-            while (left <= left_end)
-                temp[tmp_pos++] = collectionToSort[left++];
+            while (left <= leftBound)
+                temporaryCollection[temporaryPosition++] = collectionToSort[left++];
 
             while (mid <= right)
-                temp[tmp_pos++] = collectionToSort[mid++];
+                temporaryCollection[temporaryPosition++] = collectionToSort[mid++];
 
-            for (i = 0; i < num_elements; i++)
+            for (i = 0; i < numberOfElements; i++)
             {
-                collectionToSort[right] = temp[right];
+                collectionToSort[right] = temporaryCollection[right];
                 right--;
             }
         }

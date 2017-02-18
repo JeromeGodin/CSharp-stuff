@@ -8,8 +8,11 @@ namespace Sorts.Sorts
 {
     public interface ISort
     {
-        TimeSpan ExecutionTime { get; }
         bool IsStable { get; }
+        TimeComplexity TimeComplexity { get; }
+        string SpaceComplexity { get; }
+
+        TimeSpan ExecutionTime { get; }
         void Sort(IComparable[] collectionToSort);
     }
 }

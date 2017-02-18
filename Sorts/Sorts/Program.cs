@@ -13,18 +13,18 @@ namespace Sorts
         {
             const int NUMBER_OF_ELEMENTS = 100;
 
-            var arrayToSort = new IComparable[NUMBER_OF_ELEMENTS];
+            var collectionToSort = new IComparable[NUMBER_OF_ELEMENTS];
             for (var i = 0; i < NUMBER_OF_ELEMENTS; i++)
-                arrayToSort[i] = i + 1;
+                collectionToSort[i] = i + 1;
 
-            FisherYatesShuffle.Shuffle(arrayToSort);
-            DisplayArrayToSort(NUMBER_OF_ELEMENTS, arrayToSort);
+            FisherYatesShuffle.Shuffle(collectionToSort);
+            DisplayArrayToSort(NUMBER_OF_ELEMENTS, collectionToSort);
 
             var sorts = GetSorts();
             foreach (var sort in sorts)
             {
-                var arrayTemp = (IComparable[])arrayToSort.Clone();
-                sort.Sort(arrayTemp);
+                var temporaryCollection = (IComparable[])collectionToSort.Clone();
+                sort.Sort(temporaryCollection);
                 Console.WriteLine(sort.GetType().ToString().Replace("Sorts.Sorts.", "") + "(" + (sort.IsStable ? "S" : "U") + ") : " + sort.ExecutionTime);
             }
 
@@ -42,6 +42,7 @@ namespace Sorts
 
         private static void DisplayArrayToSort(int NUMBER_OF_ELEMENTS, IComparable[] arrayToSort)
         {
+            Console.WriteLine("Most of the information to code these has been taken from http://bigocheatsheet.com/ and https://en.wikipedia.org/.");
             Console.Write("Array to sort : [");
             for (var i = 0; i < NUMBER_OF_ELEMENTS - 1; i++)
                 Console.Write(arrayToSort[i] + ", ");
