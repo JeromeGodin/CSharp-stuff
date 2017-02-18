@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sorts.Sorts
 {
+    //Not added to the tests or program execution due to its potential inability to converge to a solution.
+
     public class BogoSort : ISort
     {
         public bool IsStable
@@ -39,7 +41,17 @@ namespace Sorts.Sorts
 
         private void SortIteration(IComparable[] collectionToSort, int left, int right)
         {
-            throw new NotImplementedException();
+            while (!IsCollectionSorted(collectionToSort))
+                FisherYatesShuffle.Shuffle(collectionToSort);
+        }
+
+        private bool IsCollectionSorted(IComparable[] collectionToValidate)
+        {
+            for (var i = 1; i < collectionToValidate.Count(); i++)
+                if (collectionToValidate[i].CompareTo(collectionToValidate[i - 1]) < 0)
+                    return false;
+
+            return true;
         }
     }
 }

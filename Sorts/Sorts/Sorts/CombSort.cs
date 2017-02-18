@@ -33,13 +33,43 @@ namespace Sorts.Sorts
         public void Sort(IComparable[] collectionToSort)
         {
             var startTime = DateTime.Now;
-            SortIteration(collectionToSort, 0, collectionToSort.Count() - 1);
+            SortIteration(collectionToSort);
             _executionTime = DateTime.Now - startTime;
         }
 
-        private void SortIteration(IComparable[] collectionToSort, int left, int right)
+        private void SortIteration(IComparable[] collectionToSort)
         {
-            throw new NotImplementedException();
+			int gap = collectionToSort.Count();
+			var shrinkFactor = 1.3;
+			var sorted = false;
+
+			while (!sorted)
+			{
+				gap = (int)Math.Floor(gap / shrinkFactor);
+
+				if (gap > 1)
+					sorted = false;
+				else
+				{
+					gap = 1;
+					sorted = true;
+				}
+
+				var i = 0;
+				while (i + gap < collectionToSort.Count())
+				{
+					if (collectionToSort[i].CompareTo(collectionToSort[i + gap]) > 0)
+					{
+						var temporarySwap = collectionToSort[i];
+						collectionToSort[i] = collectionToSort[i + gap];
+						collectionToSort[i + gap] = temporarySwap;
+
+						sorted = false;
+					}
+
+					i++;
+				}
+			}
         }
     }
 }

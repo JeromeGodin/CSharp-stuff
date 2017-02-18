@@ -30,16 +30,59 @@ namespace Sorts.Sorts
             get { return _executionTime; }
         }
 
+		public int NumberOfWrites { get; private set; }
+
         public void Sort(IComparable[] collectionToSort)
         {
             var startTime = DateTime.Now;
-            SortIteration(collectionToSort, 0, collectionToSort.Count() - 1);
+            SortIteration(collectionToSort);
             _executionTime = DateTime.Now - startTime;
         }
 
-        private void SortIteration(IComparable[] collectionToSort, int left, int right)
+        private int SortIteration(IComparable[] collectionToSort)
         {
-            throw new NotImplementedException();
+			var writes = 0;
+
+			for (var i = 0; i < collectionToSort.Count() - 1; i++)
+			{
+				var position = i;
+
+				for (var j = i + 1; j < collectionToSort.Count(); j++)
+					if (collectionToSort[j].CompareTo(collectionToSort[i]) < 0)
+						position++;
+
+				if (position == i)
+					continue;
+
+				while (collectionToSort[i].CompareTo(collectionToSort[position]) == 0)
+					position++;
+
+				var temporarySwap = collectionToSort[i];
+				collectionToSort[i] = collectionToSort[position];
+				collectionToSort[position] = temporarySwap;
+				writes++;
+
+				while (position != i)
+				{
+					position = i;
+					for (var j = i + 1; j < collectionToSort.Count(); j++)
+						if (collectionToSort[j].CompareTo(collectionToSort[i]) < 0)
+							position++;
+
+					if (position != i)
+					{
+						while (collectionToSort[i].CompareTo(collectionToSort[position]) == 0)
+							position++;
+
+						var temporarySwap2 = collectionToSort[i];
+						collectionToSort[i] = collectionToSort[position];
+						collectionToSort[position] = temporarySwap2;
+						writes++;
+					}
+				}
+			}
+
+			return writes;
         }
     }
 }

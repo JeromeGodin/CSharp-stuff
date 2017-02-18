@@ -41,11 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FisherYatesShuffle.cs" />
+    <Compile Include="Sorts\HelpingClasses\FisherYatesShuffle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sorts\BubbleSort.cs" />
-    <Compile Include="Sorts\BucketSort.cs" />
     <Compile Include="Sorts\BogoSort.cs" />
     <Compile Include="Sorts\CocktailShakerSort.cs" />
     <Compile Include="Sorts\CombSort.cs" />
@@ -55,9 +54,6 @@
     <Compile Include="Sorts\SmoothSort.cs" />
     <Compile Include="Sorts\OddEvenSort.cs" />
     <Compile Include="Sorts\StoogeSort.cs" />
-    <Compile Include="Sorts\CubeSort.cs" />
-    <Compile Include="Sorts\CountingSort.cs" />
-    <Compile Include="Sorts\RadixSort.cs" />
     <Compile Include="Sorts\ShellSort.cs" />
     <Compile Include="Sorts\TreeSort.cs" />
     <Compile Include="Sorts\SelectionSort.cs" />

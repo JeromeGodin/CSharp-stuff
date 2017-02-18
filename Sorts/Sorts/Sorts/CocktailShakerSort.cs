@@ -33,13 +33,56 @@ namespace Sorts.Sorts
         public void Sort(IComparable[] collectionToSort)
         {
             var startTime = DateTime.Now;
-            SortIteration(collectionToSort, 0, collectionToSort.Count() - 1);
+            SortIteration(collectionToSort);
             _executionTime = DateTime.Now - startTime;
         }
 
-        private void SortIteration(IComparable[] collectionToSort, int left, int right)
+        private void SortIteration(IComparable[] collectionToSort)
         {
-            throw new NotImplementedException();
+            var lowerBound = 0;
+            var upperBound = collectionToSort.Count() - 2;
+
+            while ( lowerBound <= upperBound)
+            {
+                var newLowerBound = lowerBound;
+                var newUpperBound = upperBound;
+
+                var swapped = false;
+                for (var i = lowerBound; i <= upperBound; i++)
+                {
+                    if (collectionToSort[i + 1].CompareTo(collectionToSort[i]) < 0)
+                    {
+                        var temporarySwap = collectionToSort[i];
+                        collectionToSort[i] = collectionToSort[i + 1];
+                        collectionToSort[i + 1] = temporarySwap;
+
+                        newUpperBound = i;
+                        swapped = true;
+                    }
+                }
+
+                if (!swapped) break;
+
+                upperBound = newUpperBound - 1;
+
+                swapped = false;
+                for (var i = upperBound; i >= lowerBound; i--)
+                {
+                    if (collectionToSort[i + 1].CompareTo(collectionToSort[i]) < 0)
+                    {
+                        var temporarySwap = collectionToSort[i];
+                        collectionToSort[i] = collectionToSort[i + 1];
+                        collectionToSort[i + 1] = temporarySwap;
+
+                        newLowerBound = i;
+                        swapped = true;
+                    }
+                }
+
+                if (!swapped) break;
+
+                lowerBound = newLowerBound + 1;
+            }
         }
     }
 }

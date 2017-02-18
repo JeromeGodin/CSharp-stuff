@@ -11,7 +11,7 @@ namespace Sorts
     {
         static void Main(string[] args)
         {
-            const int NUMBER_OF_ELEMENTS = 1000;
+            const int NUMBER_OF_ELEMENTS = 10000;
 
             var collectionToSort = new IComparable[NUMBER_OF_ELEMENTS];
             for (var i = 0; i < NUMBER_OF_ELEMENTS; i++)
@@ -36,8 +36,13 @@ namespace Sorts
             var sorts = new List<ISort>();
             sorts.Add(new QuickSort());
             sorts.Add(new MergeSort());
+            sorts.Add(new BubbleSort());
+            sorts.Add(new CocktailShakerSort());
+			sorts.Add(new CombSort());
+			sorts.Add(new CycleSort());
+			sorts.Add(new GnomeSort());
 
-            return sorts.OrderBy(s => s.IsStable).ToList();
+            return sorts.OrderByDescending(s => s.IsStable).ThenBy(s => s.GetType().Name).ToList();
         }
 
         private static void DisplayArrayToSort(int NUMBER_OF_ELEMENTS, IComparable[] arrayToSort)
