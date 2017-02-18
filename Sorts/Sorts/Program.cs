@@ -11,14 +11,14 @@ namespace Sorts
     {
         static void Main(string[] args)
         {
-            const int NUMBER_OF_ELEMENTS = 100;
+            const int NUMBER_OF_ELEMENTS = 1000;
 
             var collectionToSort = new IComparable[NUMBER_OF_ELEMENTS];
             for (var i = 0; i < NUMBER_OF_ELEMENTS; i++)
                 collectionToSort[i] = i + 1;
 
             FisherYatesShuffle.Shuffle(collectionToSort);
-            DisplayArrayToSort(NUMBER_OF_ELEMENTS, collectionToSort);
+            //DisplayArrayToSort(NUMBER_OF_ELEMENTS, collectionToSort);
 
             var sorts = GetSorts();
             foreach (var sort in sorts)
